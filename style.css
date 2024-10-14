@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('music.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f5;
+}
+
+.container {
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgba(255, 255, 255, 0.9); 
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.upload-area {
+    border: 2px dashed #aaa;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.upload-area p {
+    color: #888;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.classify-svm {
+    background-color: #355691;
+    color: white;
+}
+
+.classify-svm:hover {
+    background-color: #0056b3;
+}
+
+.classify-vgg19 {
+    background-color: #8D5A97;
+    color: white;
+}
+
+.classify-vgg19:hover {
+    background-color: #218838;
+}
+
+.result-area {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#result {
+    font-size: 18px;
+    color: #555;
+}
