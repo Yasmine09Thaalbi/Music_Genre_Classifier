@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Genre Classifier</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Music Genre Classifier</h1>
-        <div class="upload-area" id="uploadArea">
-            <p id="uploadText">Drag and drop a .wav file here or click to upload</p>
-            <input type="file" id="fileInput" accept=".wav">
-        </div>
-        <div class="buttons">
-            <button class="btn classify-svm">Classify with SVM</button>
-            <button class="btn classify-vgg19">Classify with VGG19</button>
-        </div>
-        <div class="result-area">
-            <h2>Classification Result:</h2>
-            <p id="result">No result yet.</p>
-        </div>
-    </div>
-
-    <script>
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const uploadText = document.getElementById('uploadText');
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+const uploadText = document.getElementById('uploadText');
 
         // Handle clicking the upload area to trigger file input
         uploadArea.addEventListener('click', () => {
@@ -67,6 +41,3 @@
         function displayFileName(fileName) {
             uploadText.textContent = `Selected file: ${fileName}`;
         }
-    </script>
-</body>
-</html>
