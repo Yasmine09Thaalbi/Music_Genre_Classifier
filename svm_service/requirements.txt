@@ -1,0 +1,8 @@
+flask
+numpy
+scikit-learn
+librosa
+flask-cors
+joblib
+pycm
+

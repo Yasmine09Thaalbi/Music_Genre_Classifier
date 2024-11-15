@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    networks:
+      - svm_network
+
+  svm_service:
+    build: ./svm_service
+    ports:
+      - "5000:5000"
+    networks:
+      - svm_network
+
+networks:
+  svm_network:
+    driver: bridge

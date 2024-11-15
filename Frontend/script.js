@@ -1,43 +1,101 @@
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
 const uploadText = document.getElementById('uploadText');
+const resultText = document.getElementById('result');
+const classifySvmButton = document.querySelector('.classify-svm');
+const classifyVgg19Button = document.querySelector('.classify-vgg19');
 
-        // Handle clicking the upload area to trigger file input
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();  // Simulate click on hidden file input
-        });
 
-        // Handle file selection from file input
-        fileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                displayFileName(file.name);
-            }
-        });
+uploadArea.addEventListener('click', () => {
+    fileInput.click();
+});
 
-        // Handle drag and drop functionality
-        uploadArea.addEventListener('dragover', (event) => {
-            event.preventDefault(); // Prevent default behavior (Prevent file from opening)
-            uploadArea.style.backgroundColor = '#e6f7ff'; // Optional: Change background color to indicate dragover
-        });
 
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.backgroundColor = ''; // Reset background when dragging ends
-        });
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        displayFileName(file.name);
+    }
+});
 
-        uploadArea.addEventListener('drop', (event) => {
-            event.preventDefault(); // Prevent default behavior
-            uploadArea.style.backgroundColor = ''; // Reset background
 
-            const file = event.dataTransfer.files[0]; // Get the dropped file
-            if (file && file.type === 'audio/wav') {
-                displayFileName(file.name);
-            } else {
-                uploadText.textContent = 'Please upload a valid .wav file';
-            }
-        });
+uploadArea.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    uploadArea.style.backgroundColor = '#e6f7ff';
+});
 
-        // Function to display the file name
-        function displayFileName(fileName) {
-            uploadText.textContent = `Selected file: ${fileName}`;
+
+uploadArea.addEventListener('dragleave', () => {
+    uploadArea.style.backgroundColor = '';
+});
+
+
+uploadArea.addEventListener('drop', (event) => {
+    event.preventDefault();
+    uploadArea.style.backgroundColor = '';
+
+    const file = event.dataTransfer.files[0];
+    if (file) {
+        if (file.type === 'audio/wav') {
+            displayFileName(file.name);
+            fileInput.files = event.dataTransfer.files; 
+        } else {
+            uploadText.textContent = 'Veuillez télécharger un fichier .wav valide';
         }
+    } else {
+        uploadText.textContent = 'Aucun fichier sélectionné ou fichier invalide';
+    }
+});
+
+
+function displayFileName(fileName) {
+    uploadText.textContent = `Fichier sélectionné: ${fileName}`;
+}
+
+async function classifyAudio(url) {
+    const file = fileInput.files[0];
+    if (!file) {
+        alert("Veuillez d'abord sélectionner un fichier .wav.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = async function() {
+        const base64Audio = reader.result.split(',')[1]; 
+
+        const payload = {
+            "wav_music": base64Audio
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'  
+                },
+                body: JSON.stringify(payload)  
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                resultText.textContent = `Résultat de la classification: ${result.genre}`;
+            } else {
+                resultText.textContent = `Erreur: ${response.statusText}`;
+            }
+        } catch (error) {
+            resultText.textContent = `Erreur lors de la connexion au serveur: ${error.message}`;
+        }
+    };
+    reader.readAsDataURL(file); 
+}
+
+
+classifySvmButton.addEventListener('click', () => {
+    classifySvmButton.disabled = true; 
+    classifyAudio('http://localhost:5000/predict').finally(() => {
+        classifySvmButton.disabled = false;
+    });
+    
+});
+
+
