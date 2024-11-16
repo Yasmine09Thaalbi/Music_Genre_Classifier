@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Yasmine09Thaalbi/Music_Genre_Classifier.git' 
+                git credentialsId: 'github-pat', url: 'https://github.com/Yasmine09Thaalbi/Music_Genre_Classifier.git'
             }
         }
 
