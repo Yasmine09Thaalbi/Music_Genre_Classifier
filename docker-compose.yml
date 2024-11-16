@@ -1,6 +1,6 @@
 services:
   frontend:
-    build: ./frontend
+    build: ./Frontend
     ports:
       - "8080:80"
     networks:
