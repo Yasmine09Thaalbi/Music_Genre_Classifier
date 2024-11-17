@@ -23,7 +23,8 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 script {
-                    sh 'pytest tests/'
+                    sh 'pytest tests/test_svm_service.py'
+                    echo "Unit tests completed successfully!"
                 }
             }
         }

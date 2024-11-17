@@ -17,4 +17,7 @@ def test_predict_genre(client):
 
     assert response.status_code == 200
 
-    assert 'genre' in response.get_json()
+    json_response = response.get_json()
+    assert 'genre' in json_response
+
+    assert json_response['genre'] == 'classical'
