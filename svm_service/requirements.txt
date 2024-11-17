@@ -5,4 +5,4 @@ librosa
 flask-cors
 joblib
 pycm
-
+pytest
