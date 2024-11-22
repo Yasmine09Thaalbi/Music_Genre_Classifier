@@ -5,14 +5,23 @@ services:
       - "8080:80"
     networks:
       - svm_network
+      - vgg19_network
 
   svm_service:
     build: ./svm_service
     ports:
-      - "5000:5000"
+      - "5001:5001"
     networks:
       - svm_network
+  vgg19_service:
+    build: ./vgg19_service
+    ports:
+      - "5002:5002"
+    networks:
+      - vgg19_network
 
 networks:
   svm_network:
+    driver: bridge
+  vgg19_network:
     driver: bridge

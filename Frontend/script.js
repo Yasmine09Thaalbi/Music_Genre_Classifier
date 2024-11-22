@@ -92,10 +92,17 @@ async function classifyAudio(url) {
 
 classifySvmButton.addEventListener('click', () => {
     classifySvmButton.disabled = true; 
-    classifyAudio('http://localhost:5000/predict').finally(() => {
+    classifyAudio('http://localhost:5001/predict').finally(() => {
         classifySvmButton.disabled = false;
     });
     
 });
 
 
+classifyVgg19Button.addEventListener('click', () => {
+    classifyVgg19Button.disabled = true; 
+    classifyAudio('http://localhost:5002/vgg19_predict').finally(() => {
+        classifyVgg19Button.disabled = false;
+    });
+    
+});

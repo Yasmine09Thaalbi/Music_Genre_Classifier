@@ -1,0 +1,7 @@
+flask
+tensorflow-cpu  
+numpy
+librosa
+opencv-python-headless
+soundfile
+flask-cors

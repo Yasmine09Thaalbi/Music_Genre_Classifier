@@ -10,5 +10,5 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --timeout 1000 -r requirements.txt
 
-EXPOSE 5001
+EXPOSE 5002
 CMD ["python", "app.py"]
