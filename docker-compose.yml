@@ -19,9 +19,26 @@ services:
       - "5002:5002"
     networks:
       - vgg19_network
+  jenkins:
+    build: ./Jenkins_env
+    container_name: jenkins1
+    ports:
+      - "8081:8080"  
+    volumes:
+      - ./Jenkins_env/jenkins_data:/var/jenkins_home
+      - jenkins_home1:/var/jenkins_home  
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  
+    networks:
+      - jenkins_network
+      - svm_network  
+      - vgg19_network 
 
 networks:
   svm_network:
     driver: bridge
   vgg19_network:
+    driver: bridge
+  jenkins_network:
     driver: bridge

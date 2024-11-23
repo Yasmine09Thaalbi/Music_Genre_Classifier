@@ -15,16 +15,16 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh "docker-compose build"
+                    sh 'docker-compose build'
                 }
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Run SVM Service Unit Test') {
             steps {
                 script {
                     sh 'pytest tests/test_svm_service.py'
-                    echo "Unit tests completed successfully!"
+                    echo "Unit test of svm service completed successfully!"
                 }
             }
         }
