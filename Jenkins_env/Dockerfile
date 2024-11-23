@@ -20,6 +20,11 @@ RUN curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-
 
 RUN usermod -aG docker jenkins
 
+# Install Git LFS (Large File Storage)
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && \
+    sudo apt-get install git-lfs && \
+    sudo git lfs install
+
 
 EXPOSE 8080
 
