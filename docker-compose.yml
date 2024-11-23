@@ -35,6 +35,10 @@ services:
       - svm_network  
       - vgg19_network 
 
+volumes:
+  jenkins_home1:  
+
+
 networks:
   svm_network:
     driver: bridge
