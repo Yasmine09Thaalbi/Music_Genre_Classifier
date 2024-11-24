@@ -7,7 +7,7 @@ from io import open
 # Add the svm_service directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), '../svm_service'))
 
-from music_genre_classifier.svm_service.app import app
+from svm_service.app import app
 
 @pytest.fixture
 def client():
