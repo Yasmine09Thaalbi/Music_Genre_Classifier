@@ -9,7 +9,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-model = joblib.load('svm_model.pkl')
+model = joblib.load(os.path.join(os.path.dirname(__file__), 'svm_model.pkl'))
+
 
 @app.route('/predict', methods=['POST'])
 def predict_genre():
